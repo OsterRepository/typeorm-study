@@ -1,9 +1,8 @@
-import { Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { AppService } from './app.service';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Role, UserModel } from './entity/user.entity';
-import { Repository } from 'typeorm';
-import { ProfileModel } from './entity/profile.entity';
+import { Controller, Get, Param, Patch, Post } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { UserModel } from "./entity/user.entity";
+import { Repository } from "typeorm";
+import { ProfileModel } from "./entity/profile.entity";
 
 @Controller()
 export class AppController {
