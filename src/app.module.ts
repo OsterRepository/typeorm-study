@@ -7,11 +7,12 @@ import { StudentModdel, TeacherModel } from 'src/entity/person.entity';
 import { AirplaneModel, BookModel, CarModel, ComputerModel, SingleBaseModel } from 'src/entity/inheritance.entity';
 import { ProfileModel } from 'src/entity/profile.entity';
 import { PostModel } from 'src/entity/post.entity';
+import { TagModel } from 'src/entity/tag.entity';
 
 @Module({
     controllers: [AppController],
     imports: [
-        TypeOrmModule.forFeature([UserModel, ProfileModel, PostModel]),
+        TypeOrmModule.forFeature([UserModel, ProfileModel, PostModel, TagModel]),
         TypeOrmModule.forRoot({
             database: 'typeormstudy',
             entities: [
@@ -25,6 +26,7 @@ import { PostModel } from 'src/entity/post.entity';
                 AirplaneModel,
                 ProfileModel,
                 PostModel,
+                TagModel,
             ],
             host: '127.0.0.1',
             password: 'postgres',
