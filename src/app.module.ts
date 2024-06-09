@@ -1,27 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from 'src/app.controller';
+import { AppService } from 'src/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModel } from './entity/user.entity';
-import { StudentModdel, TeacherModel } from './entity/person.entity';
-import {
-    AirplaneModel,
-    BookModel,
-    CarModel,
-    ComputerModel,
-    SingleBaseModel,
-} from './entity/inheritance.entity';
-import { ProfileModel } from './entity/profile.entity';
+import { UserModel } from 'src/entity/user.entity';
+import { StudentModdel, TeacherModel } from 'src/entity/person.entity';
+import { AirplaneModel, BookModel, CarModel, ComputerModel, SingleBaseModel } from 'src/entity/inheritance.entity';
+import { ProfileModel } from 'src/entity/profile.entity';
+import { PostModel } from 'src/entity/post.entity';
 
 @Module({
+    controllers: [AppController],
     imports: [
-        TypeOrmModule.forFeature([UserModel, ProfileModel]),
+        TypeOrmModule.forFeature([UserModel, ProfileModel, PostModel]),
         TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: '127.0.0.1',
-            port: 5432,
-            username: 'postgres',
-            password: 'postgres',
             database: 'typeormstudy',
             entities: [
                 UserModel,
@@ -33,11 +24,16 @@ import { ProfileModel } from './entity/profile.entity';
                 ComputerModel,
                 AirplaneModel,
                 ProfileModel,
+                PostModel,
             ],
+            host: '127.0.0.1',
+            password: 'postgres',
+            port: 5432,
             synchronize: true,
+            type: 'postgres',
+            username: 'postgres',
         }),
     ],
-    controllers: [AppController],
     providers: [AppService],
 })
 export class AppModule {}
