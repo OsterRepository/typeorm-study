@@ -61,7 +61,21 @@ export class UserModel {
     @Generated('uuid')
     additionalId: string;
 
-    @OneToOne(() => ProfileModel, (profile) => profile.user)
+    @OneToOne(() => ProfileModel, (profile) => profile.user, {
+        // find() 실행 할때마다 항상 같이 가져올 relation
+        eager: true,
+        // 저장할때 relation 을 한번에 같이 저장가능
+        cascade: true,
+        //  nullable: true 이면 null 이 가능하다. 버전에 따라 에러를 던지지 않는다
+        nullable: true,
+        // onDelete: 'CASCADE' 이면 user 가 삭제되면 profile 도 삭제된다.
+        // onDelete: 'SET NULL' 이면 user 가 삭제되면 profile 의 user_id 가 null 이 된다.
+        // onDelete: 'RESTRICT' 이면 user 를 삭제하려해도 profile 이 있다면 삭제 되지 않는다.
+        // onDelete: 'NO ACTION' 이면 user 가 삭제되면 profile 도 삭제되지 않는다.
+        // onDelete: 'SET DEFAULT' 이면 user 가 삭제되면 profile 의 user_id 가 default 값으로 설정된다.
+        // 버전에 따라 에러를 던지지 않는다
+        onDelete: 'RESTRICT',
+    })
     profile: ProfileModel;
 
     @OneToMany(() => PostModel, (post) => post.author)
